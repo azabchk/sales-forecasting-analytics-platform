@@ -1,18 +1,20 @@
-type Props = { total_sales: number; total_customers: number; avg_ticket: number; avg_daily_sales: number }
+import type { KpiSummary } from '../types/api'
 
-export default function KpiCards(props: Props) {
-  const cards = [
-    ['Total Sales', props.total_sales.toFixed(2)],
-    ['Total Customers', props.total_customers.toString()],
-    ['Avg Ticket', props.avg_ticket.toFixed(2)],
-    ['Avg Daily Sales', props.avg_daily_sales.toFixed(2)],
-  ]
+const labels: Array<{ key: keyof KpiSummary; title: string; hint: string; formatter: (v: number) => string }> = [
+  { key: 'total_sales', title: 'Total Sales', hint: 'Сумма продаж за период', formatter: (v) => v.toLocaleString('ru-RU', { maximumFractionDigits: 0 }) },
+  { key: 'total_customers', title: 'Total Customers', hint: 'Количество покупателей', formatter: (v) => v.toLocaleString('ru-RU') },
+  { key: 'avg_ticket', title: 'Avg Ticket', hint: 'Средний чек', formatter: (v) => v.toLocaleString('ru-RU', { maximumFractionDigits: 2 }) },
+  { key: 'avg_daily_sales', title: 'Avg Daily Sales', hint: 'Средние дневные продажи', formatter: (v) => v.toLocaleString('ru-RU', { maximumFractionDigits: 2 }) },
+]
+
+export default function KpiCards({ data }: { data: KpiSummary }) {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px', marginBottom: '20px' }}>
-      {cards.map(([name, value]) => (
-        <div key={name} style={{ border: '1px solid #ddd', borderRadius: '8px', padding: '10px' }}>
-          <strong>{name}</strong>
-          <div>{value}</div>
+    <div className="kpi-grid">
+      {labels.map((item) => (
+        <div key={item.key} className="kpi-card">
+          <span className="kpi-title">{item.title}</span>
+          <strong className="kpi-value">{item.formatter(data[item.key])}</strong>
+          <span className="kpi-hint">{item.hint}</span>
         </div>
       ))}
     </div>

@@ -76,3 +76,39 @@ Query params:
 ```json
 {"detail": "Store history not found"}
 ```
+
+## GET /kpi/breakdowns
+**Response 200**
+```json
+{
+  "by_store_type": [{"label": "a", "value": 123456.0}],
+  "promo_vs_no_promo": [{"promo": 0, "avg_sales": 4321.0}, {"promo": 1, "avg_sales": 6123.0}],
+  "holiday_impact": [{"state_holiday": "0", "avg_sales": 5012.0}]
+}
+```
+
+## GET /kpi/top-stores
+Query params:
+- `date_from`
+- `date_to`
+- `limit` (optional, default 10)
+
+**Response 200**
+```json
+[
+  {"store_id": 1, "total_sales": 1000000.0, "avg_daily_sales": 5100.0}
+]
+```
+
+## GET /stores/{store_id}/analytics
+Query params:
+- `date_from`
+- `date_to`
+
+**Response 200**
+```json
+{
+  "weekly_pattern": [{"label": "1", "value": 4300.0}],
+  "monthly_sales": [{"label": "2015-01", "value": 123000.0}]
+}
+```

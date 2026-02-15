@@ -1,15 +1,15 @@
-import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer } from 'recharts'
+import { CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
 
-export default function SalesChart({ data }: { data: Array<{ period: string; sales: number }> }) {
+export default function SalesChart({ data, dataKey = 'sales', xKey = 'period' }: { data: Array<Record<string, number | string>>; dataKey?: string; xKey?: string }) {
   return (
-    <div style={{ width: '100%', height: 320 }}>
+    <div style={{ width: '100%', height: 300 }}>
       <ResponsiveContainer>
         <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="period" />
-          <YAxis />
-          <Tooltip />
-          <Line type="monotone" dataKey="sales" stroke="#8884d8" dot={false} />
+          <CartesianGrid stroke="#2a3340" strokeDasharray="3 3" />
+          <XAxis dataKey={xKey} stroke="#9eb1c7" tick={{ fontSize: 11 }} />
+          <YAxis stroke="#9eb1c7" tick={{ fontSize: 11 }} />
+          <Tooltip contentStyle={{ background: '#0f1722', border: '1px solid #2a3340', color: '#eaf1ff' }} />
+          <Line type="monotone" dataKey={dataKey} stroke="#60a5fa" strokeWidth={2} dot={false} />
         </LineChart>
       </ResponsiveContainer>
     </div>

@@ -24,3 +24,6 @@ ml/artifacts/*
 .DS_Store
 .idea/
 .vscode/
+
+# Frontend runtime env for local demo
+!frontend/.env.local

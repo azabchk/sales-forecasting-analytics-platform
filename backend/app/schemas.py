@@ -1,5 +1,5 @@
-from pydantic import BaseModel, Field
 from datetime import date
+from pydantic import BaseModel, Field
 
 
 class HealthResponse(BaseModel):
@@ -23,6 +23,38 @@ class SalesPoint(BaseModel):
     period: date
     sales: float
     customers: int | None = None
+
+
+class BreakdownItem(BaseModel):
+    label: str
+    value: float
+
+
+class PromoBreakdown(BaseModel):
+    promo: int
+    avg_sales: float
+
+
+class HolidayBreakdown(BaseModel):
+    state_holiday: str
+    avg_sales: float
+
+
+class KpiBreakdownResponse(BaseModel):
+    by_store_type: list[BreakdownItem]
+    promo_vs_no_promo: list[PromoBreakdown]
+    holiday_impact: list[HolidayBreakdown]
+
+
+class TopStoreItem(BaseModel):
+    store_id: int
+    total_sales: float
+    avg_daily_sales: float
+
+
+class StoreAnalyticsResponse(BaseModel):
+    weekly_pattern: list[BreakdownItem]
+    monthly_sales: list[BreakdownItem]
 
 
 class ForecastRequest(BaseModel):
