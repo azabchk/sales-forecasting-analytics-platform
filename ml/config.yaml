@@ -1,0 +1,9 @@
+train:
+  horizon_days: 30
+  test_days: 60
+  target_column: sales
+
+paths:
+  artifacts_dir: ./artifacts
+  model_path: ./artifacts/model.joblib
+  metadata_path: ./artifacts/model_metadata.json

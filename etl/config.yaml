@@ -1,0 +1,7 @@
+data:
+  train_csv: ../data/train.csv
+  store_csv: ../data/store.csv
+
+database:
+  schema: public
+  truncate_before_load: true
